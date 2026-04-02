@@ -23,7 +23,8 @@ header h1 {
 }
 .player-btn,
 #restartBtn,
-#changePlayerBtn {
+#changePlayerBtn,
+#resetCluesBtn {
   padding: 10px 16px;
   background-color: #ffbb38;
   border: 2px solid #f48f06;
@@ -33,7 +34,8 @@ header h1 {
 }
 .player-btn:hover,
 #restartBtn:hover,
-#changePlayerBtn:hover {
+#changePlayerBtn:hover,
+#resetCluesBtn:hover {
   background-color: #ffc749;
 }
 .hidden { display: none; }

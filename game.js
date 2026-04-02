@@ -34,6 +34,7 @@ const clueOkBtn = document.getElementById("clueOkBtn");
 const clueAvatar = document.getElementById("clueAvatar");
 const restartBtn = document.getElementById("restartBtn");
 const changePlayerBtn = document.getElementById("changePlayerBtn");
+const resetCluesBtn = document.getElementById("resetCluesBtn");
 const scoreText = document.getElementById("scoreText");
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -54,6 +55,14 @@ changePlayerBtn.addEventListener("click", () => {
   endSection.classList.add("hidden");
   selectSection.classList.remove("hidden");
   statusEl.classList.add("hidden");
+});
+
+resetCluesBtn.addEventListener("click", () => {
+  localStorage.setItem(`clueIndex_${chosenPlayer}`, "0");
+  playerClueIndex = 0;
+  statusEl.textContent = `Ledtrådar för ${chosenPlayer} har startats om.`;
+  endTitle.textContent = "Återställt!";
+  clueText.textContent = "Nu börjar ledtrådarna från början för detta barn.";
 });
 
 let bird = { x: 90, y: 240, vy: 0, radius: 14 };
