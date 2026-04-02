@@ -313,7 +313,7 @@ function updatePhysics() {
     const secLeft = Math.ceil(safeZoneRemaining / 60);
     statusEl.textContent = `Säker zon: inga rör just nu. Klar om ${secLeft}s`;
   } else {
-    statusEl.textContent = score === targetScore - 1
+    statusEl.textContent = score >= targetScore - 2
       ? "Sista hindret! Flyg genom målet."
       : `Spela på! Poäng: ${score}`;
 
@@ -324,7 +324,7 @@ function updatePhysics() {
         x: canvas.width,
         top: topHeight,
         width: pipeWidth,
-        isGoal: score === targetScore - 1
+        isGoal: score === targetScore - 2
       });
       pipeSpawnTimer = 110;
     }
@@ -542,7 +542,7 @@ clueOkBtn.addEventListener("click", () => {
   endAvatar.src = getPlayerImagePath(chosenPlayer);
   endAvatar.classList.remove("hidden");
   endTitle.textContent = `Bra jobbat, ${chosenPlayer}!`;
-  clueText.textContent = "Välj spela igen eller nytt barn.";
-  statusEl.textContent = `Bra jobbat, ${chosenPlayer}! Välj spela igen eller nytt barn.`;
+  clueText.textContent = "Välj spela för nästa ledtråd eller nytt barn.";
+  statusEl.textContent = `Bra jobbat, ${chosenPlayer}! Välj spela för nästa ledtråd eller nytt barn.`;
   scrollToSection(statusEl);
 });
