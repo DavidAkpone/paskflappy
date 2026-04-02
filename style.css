@@ -118,6 +118,10 @@ header {
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
 }
 
+#goHuntBanner.hidden {
+  display: none;
+}
+
 #clueText {
   margin: 10px 0 16px;
 }
