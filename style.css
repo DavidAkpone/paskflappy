@@ -11,9 +11,16 @@ body {
   text-align: center;
   padding: 15px;
 }
-header h1 {
-  margin: 0.3em 0;
-  color: #2b5a1d;
+header {
+  margin-bottom: 8px;
+}
+
+#titleBanner {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  margin: 0 auto 10px;
 }
 .players {
   display: flex;
