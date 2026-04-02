@@ -24,6 +24,11 @@
 
     <section id="status" class="hidden"></section>
 
+    <section id="clue-list-section" class="hidden">
+      <h2>Insamlade ledtrådar</h2>
+      <ul id="clueList"></ul>
+    </section>
+
     <section id="game-area" class="hidden">
       <!-- Anpassat för stående telefon: större höjd och smalare bredd -->
       <canvas id="gameCanvas" width="360" height="640"></canvas>
@@ -32,6 +37,7 @@
     </section>
 
     <section id="end-section" class="hidden">
+      <img id="endAvatar" class="hidden" src="" alt="Barn" width="140" height="140" />
       <h2 id="endTitle"></h2>
       <p id="clueText"></p>
       <button id="restartBtn">Spela igen</button>
