@@ -60,7 +60,7 @@ const eggImages = eggImagePaths.map(path => {
 
 const playerImagePaths = {
   Adam: "images/adam.png",
-  Isac: "images/i.png",
+  Isac: "images/isac.png",
   Leon: "images/leon.png"
 };
 
