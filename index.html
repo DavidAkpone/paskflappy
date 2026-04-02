@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Påskflappy - Äggjakt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="container">
+    <header>
+      <h1>Påskflappy för Adam, Isac och Leon</h1>
+      <p>Välj ditt namn och få tre ledtrådar när du klarar banan.</p>
+    </header>
+
+    <section id="select-section">
+      <p>Välj barn:</p>
+      <div class="players">
+        <button class="player-btn" data-player="Adam">Adam</button>
+        <button class="player-btn" data-player="Isac">Isac</button>
+        <button class="player-btn" data-player="Leon">Leon</button>
+      </div>
+    </section>
+
+    <section id="status" class="hidden"></section>
+
+    <section id="game-area" class="hidden">
+      <!-- Anpassat för stående telefon: större höjd och smalare bredd -->
+      <canvas id="gameCanvas" width="360" height="640"></canvas>
+      <p>Tryck Mellanslag eller klicka för att hoppa.</p>
+      <p id="scoreText">Poäng: 0</p>
+    </section>
+
+    <section id="end-section" class="hidden">
+      <h2 id="endTitle"></h2>
+      <p id="clueText"></p>
+      <button id="restartBtn">Spela igen</button>
+      <button id="changePlayerBtn">Välj annat barn</button>
+    </section>
+
+    <div id="clueOverlay" class="hidden">
+      <div id="clueBox">
+        <img id="clueAvatar" src="" alt="Barn" width="60" height="60" />
+        <h2 id="clueTitle">Ledtråd</h2>
+        <p id="clueTextBig"></p>
+        <button id="clueOkBtn">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

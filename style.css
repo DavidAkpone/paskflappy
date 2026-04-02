@@ -1,0 +1,94 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg, #f6f1d3 0%, #ffe4a0 100%);
+  color: #333;
+}
+#container {
+  max-width: 460px;
+  margin: 20px auto;
+  text-align: center;
+  padding: 15px;
+}
+header h1 {
+  margin: 0.3em 0;
+  color: #2b5a1d;
+}
+.players {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.player-btn,
+#restartBtn,
+#changePlayerBtn {
+  padding: 10px 16px;
+  background-color: #ffbb38;
+  border: 2px solid #f48f06;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.player-btn:hover,
+#restartBtn:hover,
+#changePlayerBtn:hover {
+  background-color: #ffc749;
+}
+.hidden { display: none; }
+#game-area { margin-top: 10px; }
+#gameCanvas {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  border: 6px solid #5aab43;
+  border-radius: 14px;
+  background: #aadbf5;
+}
+#scoreText { margin: 8px 0; font-size: 1.1rem; font-weight: bold; }
+#status { margin-top: 10px; padding: 8px; border-radius: 8px; background: #fff9d5; border: 1px solid #e0c76b; }
+
+#clueOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#clueOverlay.hidden { display: none; }
+
+#clueBox {
+  background: #fff9cd;
+  padding: 24px;
+  max-width: 90%;
+  border-radius: 16px;
+  border: 3px solid #f5c20d;
+  box-shadow: 0 8px 20px rgba(0,0,0,.3);
+  text-align: center;
+}
+
+#clueAvatar {
+  border-radius: 50%;
+  border: 3px solid #ffad5f;
+  margin-bottom: 10px;
+}
+
+#clueTextBig {
+  font-size: 1.5rem;
+  margin: 16px 0;
+  font-weight: 700;
+}
+
+#clueOkBtn {
+  padding: 10px 18px;
+  background-color: #4da60f;
+  border: 2px solid #3a7f0c;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
