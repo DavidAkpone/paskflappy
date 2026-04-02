@@ -56,7 +56,7 @@ changePlayerBtn.addEventListener("click", () => {
   endSection.classList.add("hidden");
   selectSection.classList.remove("hidden");
   statusEl.classList.add("hidden");
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  scrollToSection(selectSection);
 });
 
 resetCluesBtn.addEventListener("click", () => {
@@ -77,9 +77,24 @@ let safeZoneFrames = 160; // cirka 2.5–3 sekunder
 let pipeSpeed = 2.5;
 let pipeWidth = 46;
 let safeZoneRemaining = safeZoneFrames;
+const playerImagePaths = {
+  Adam: "images/adam.png",
+  Isac: "images/i.png",
+  Leon: "images/leon.png"
+};
 
 function setGameMode(active) {
   document.body.classList.toggle("game-active", active);
+}
+
+function getPlayerImagePath(player) {
+  return playerImagePaths[player] || `images/${player.toLowerCase()}.png`;
+}
+
+function scrollToSection(element) {
+  requestAnimationFrame(() => {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 }
 
 function startGameScreen() {
@@ -90,10 +105,10 @@ function startGameScreen() {
   statusEl.classList.remove("hidden");
   gameArea.classList.remove("hidden");
   statusEl.innerHTML = `Aktiv spelare: <strong>${chosenPlayer}</strong> - nästa ledtråd: ${playerClueIndex + 1} av 3`;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  scrollToSection(gameArea);
 
   // Ladda bilden för fågeln
-  birdImage.src = `images/${chosenPlayer.toLowerCase()}.png`;
+  birdImage.src = getPlayerImagePath(chosenPlayer);
   birdImage.onload = () => {
     startNewRun();
   };
@@ -117,6 +132,7 @@ function startNewRun() {
   gameArea.classList.remove("hidden");
   statusEl.textContent = "Spelet har börjat! Säker zon i början - hoppa med mellanslag eller klick.";
   scoreText.textContent = `Poäng: ${score}`;
+  scrollToSection(gameArea);
   requestAnimationFrame(gameLoop);
 }
 
@@ -125,7 +141,7 @@ function showClue() {
   const clues = players[chosenPlayer];
   const clueIndex = Math.min(playerClueIndex, clues.length - 1);
   clueTextBig.textContent = `Ledtråd ${clueIndex + 1}: ${clues[clueIndex]}`;
-  clueAvatar.src = `images/${chosenPlayer.toLowerCase()}.png`;
+  clueAvatar.src = getPlayerImagePath(chosenPlayer);
   clueOverlay.classList.remove("hidden");
   endSection.classList.add("hidden");
   gameArea.classList.add("hidden");
@@ -147,6 +163,7 @@ function failRun(message) {
   clueText.textContent = "Du får ledtråd när du klarar banan. Försök igen!";
   endSection.classList.remove("hidden");
   gameArea.classList.add("hidden");
+  scrollToSection(statusEl);
 }
 
 function completeRun() {
@@ -299,4 +316,5 @@ clueOkBtn.addEventListener("click", () => {
   endSection.classList.remove("hidden");
   gameArea.classList.add("hidden");
   statusEl.textContent = `Bra jobbat, ${chosenPlayer}! Välj spela igen eller nytt barn.`;
+  scrollToSection(statusEl);
 });
