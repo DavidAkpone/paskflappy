@@ -28,6 +28,7 @@ const clueListSection = document.getElementById("clue-list-section");
 const clueList = document.getElementById("clueList");
 const gameArea = document.getElementById("game-area");
 const endSection = document.getElementById("end-section");
+const goHuntBanner = document.getElementById("goHuntBanner");
 const endAvatar = document.getElementById("endAvatar");
 const endTitle = document.getElementById("endTitle");
 const clueText = document.getElementById("clueText");
@@ -80,6 +81,7 @@ changePlayerBtn.addEventListener("click", () => {
   setGameMode(false);
   endSection.classList.add("hidden");
   clueListSection.classList.add("hidden");
+  goHuntBanner.classList.add("hidden");
   endAvatar.classList.add("hidden");
   selectSection.classList.remove("hidden");
   statusEl.classList.add("hidden");
@@ -90,6 +92,7 @@ resetCluesBtn.addEventListener("click", () => {
   localStorage.setItem(`clueIndex_${chosenPlayer}`, "0");
   playerClueIndex = 0;
   endAvatar.classList.add("hidden");
+  goHuntBanner.classList.add("hidden");
   renderClueList();
   statusEl.textContent = `Ledtrådar för ${chosenPlayer} har startats om.`;
   endTitle.textContent = "Återställt!";
@@ -157,6 +160,26 @@ function renderClueList() {
   clueListSection.classList.remove("hidden");
 }
 
+function showGoHuntScreen() {
+  const clues = players[chosenPlayer];
+  const listItems = clues.map((clue, index) => `<li>Ledtråd ${index + 1}: ${clue}</li>`).join("");
+
+  setGameMode(false);
+  clueOverlay.classList.add("hidden");
+  gameArea.classList.add("hidden");
+  endSection.classList.remove("hidden");
+  goHuntBanner.classList.remove("hidden");
+  endAvatar.src = getPlayerImagePath(chosenPlayer);
+  endAvatar.classList.remove("hidden");
+  endTitle.textContent = "";
+  clueText.innerHTML = `
+    <p class="hunt-message">Nu har du alla dina ledtrådar, ${chosenPlayer}!</p>
+    <ul class="hunt-list">${listItems}</ul>
+  `;
+  statusEl.textContent = `${chosenPlayer} har fått alla 3 ledtrådarna. GO HUNT!!`;
+  scrollToSection(statusEl);
+}
+
 function startGameScreen() {
   setGameMode(true);
   selectSection.classList.add("hidden");
@@ -189,6 +212,7 @@ function startNewRun() {
   gameRunning = true;
   clueOverlay.classList.add("hidden");
   endSection.classList.add("hidden");
+  goHuntBanner.classList.add("hidden");
   endAvatar.classList.add("hidden");
   clueListSection.classList.remove("hidden");
   gameArea.classList.remove("hidden");
@@ -222,6 +246,7 @@ function failRun(message) {
   gameRunning = false;
   setGameMode(false);
   clueOverlay.classList.add("hidden");
+  goHuntBanner.classList.add("hidden");
   endAvatar.classList.add("hidden");
   statusEl.textContent = message;
   endTitle.textContent = `Försök igen, ${chosenPlayer}`;
@@ -236,6 +261,15 @@ function completeRun() {
   gameRunning = false;
   setGameMode(false);
   statusEl.textContent = "Grattis! Du avslutade banan och får en ledtråd.";
+
+  if (playerClueIndex >= players[chosenPlayer].length - 1) {
+    playerClueIndex = players[chosenPlayer].length;
+    localStorage.setItem(`clueIndex_${chosenPlayer}`, playerClueIndex.toString());
+    renderClueList();
+    showGoHuntScreen();
+    return;
+  }
+
   showClue();
 }
 
@@ -465,8 +499,11 @@ clueOkBtn.addEventListener("click", () => {
   clueOverlay.classList.add("hidden");
   endSection.classList.remove("hidden");
   gameArea.classList.add("hidden");
+  goHuntBanner.classList.add("hidden");
   endAvatar.src = getPlayerImagePath(chosenPlayer);
   endAvatar.classList.remove("hidden");
+  endTitle.textContent = `Bra jobbat, ${chosenPlayer}!`;
+  clueText.textContent = "Välj spela igen eller nytt barn.";
   statusEl.textContent = `Bra jobbat, ${chosenPlayer}! Välj spela igen eller nytt barn.`;
   scrollToSection(statusEl);
 });

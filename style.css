@@ -99,6 +99,47 @@ header {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
+#end-section {
+  position: relative;
+  overflow: visible;
+  background: #fff9cd;
+  border: 3px solid #f5c20d;
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin-top: 44px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+#goHuntBanner {
+  display: block;
+  width: min(92%, 220px);
+  height: auto;
+  margin: -56px auto 6px;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+}
+
+#clueText {
+  margin: 10px 0 16px;
+}
+
+.hunt-message {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 14px;
+  color: #8a3b00;
+}
+
+.hunt-list {
+  margin: 0 auto;
+  padding-left: 24px;
+  max-width: 320px;
+  text-align: left;
+}
+
+.hunt-list li + li {
+  margin-top: 8px;
+}
+
 #clueOverlay {
   position: fixed;
   inset: 0;
