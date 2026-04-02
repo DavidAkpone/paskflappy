@@ -104,6 +104,7 @@ function startGameScreen() {
 }
 
 function startNewRun() {
+  setGameMode(true);
   score = 0;
   bird = { x: 90, y: 240, vy: 0, radius: 14 };
   pipes = [];
@@ -120,6 +121,7 @@ function startNewRun() {
 }
 
 function showClue() {
+  setGameMode(false);
   const clues = players[chosenPlayer];
   const clueIndex = Math.min(playerClueIndex, clues.length - 1);
   clueTextBig.textContent = `Ledtråd ${clueIndex + 1}: ${clues[clueIndex]}`;
@@ -138,6 +140,7 @@ function showClue() {
 function failRun(message) {
   gameOver = true;
   gameRunning = false;
+  setGameMode(false);
   clueOverlay.classList.add("hidden");
   statusEl.textContent = message;
   endTitle.textContent = `Försök igen, ${chosenPlayer}`;
@@ -149,6 +152,7 @@ function failRun(message) {
 function completeRun() {
   gameOver = true;
   gameRunning = false;
+  setGameMode(false);
   statusEl.textContent = "Grattis! Du avslutade banan och får en ledtråd.";
   showClue();
 }
@@ -290,6 +294,7 @@ window.addEventListener("keydown", (event) => {
 canvas.addEventListener("click", () => { jump(); });
 
 clueOkBtn.addEventListener("click", () => {
+  setGameMode(false);
   clueOverlay.classList.add("hidden");
   endSection.classList.remove("hidden");
   gameArea.classList.add("hidden");
