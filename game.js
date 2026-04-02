@@ -65,6 +65,7 @@ const playerImagePaths = {
 };
 
 const targetScore = 5;
+const goalZoneWidth = 120;
 
 const playerButtons = Array.from(document.getElementsByClassName("player-btn"));
 playerButtons.forEach(btn => {
@@ -335,9 +336,13 @@ function updatePhysics() {
         score += 1;
         scoreText.textContent = `Poäng: ${score}`;
 
-        if (pipe.isGoal || score >= targetScore) {
+        if (!pipe.isGoal && score >= targetScore) {
           completeRun();
         }
+      }
+
+      if (pipe.isGoal && pipe.passed && bird.x > pipe.x + pipe.width + goalZoneWidth) {
+        completeRun();
       }
 
       if (!gameOver && bird.x + bird.radius > pipe.x && bird.x - bird.radius < pipe.x + pipe.width) {
@@ -359,6 +364,11 @@ function drawFrame() {
   skyGradient.addColorStop(1, "#9dd8a9");
   ctx.fillStyle = skyGradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const goalPipe = pipes.find(pipe => pipe.isGoal);
+  if (goalPipe) {
+    drawGoalZone(goalPipe);
+  }
 
   ctx.fillStyle = "#76c043";
   ctx.fillRect(0, canvas.height - 50, canvas.width, 50);
@@ -473,6 +483,35 @@ function drawGoalPipe(pipe) {
   ctx.strokeText("MÅL", pipe.x + pipe.width / 2, centerY + 6);
   ctx.fillStyle = "#fff8dc";
   ctx.fillText("MÅL", pipe.x + pipe.width / 2, centerY + 6);
+
+  ctx.restore();
+}
+
+function drawGoalZone(pipe) {
+  const zoneX = pipe.x + pipe.width;
+  const zoneWidth = Math.min(goalZoneWidth, canvas.width - zoneX);
+  if (zoneWidth <= 0) return;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(255, 245, 157, 0.75)";
+  ctx.fillRect(zoneX, 0, zoneWidth, canvas.height - 50);
+
+  ctx.strokeStyle = "rgba(217, 79, 43, 0.45)";
+  ctx.lineWidth = 4;
+  ctx.setLineDash([10, 10]);
+  ctx.beginPath();
+  ctx.moveTo(zoneX, 0);
+  ctx.lineTo(zoneX, canvas.height - 50);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = "rgba(180, 125, 0, 0.18)";
+  ctx.font = "bold 28px Segoe UI";
+  ctx.textAlign = "center";
+
+  for (let y = 80; y < canvas.height - 80; y += 120) {
+    ctx.fillText("MÅL", zoneX + zoneWidth / 2, y);
+  }
 
   ctx.restore();
 }

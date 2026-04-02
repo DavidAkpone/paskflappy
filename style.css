@@ -29,7 +29,6 @@ header {
   flex-wrap: wrap;
 }
 .player-btn,
-#restartBtn,
 #changePlayerBtn,
 #resetCluesBtn {
   padding: 10px 16px;
@@ -40,10 +39,23 @@ header {
   cursor: pointer;
 }
 .player-btn:hover,
-#restartBtn:hover,
 #changePlayerBtn:hover,
 #resetCluesBtn:hover {
   background-color: #ffc749;
+}
+
+#restartBtn {
+  padding: 10px 16px;
+  background-color: #4da60f;
+  border: 2px solid #3a7f0c;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#restartBtn:hover {
+  background-color: #5fbc1a;
 }
 .hidden { display: none; }
 #game-area { margin-top: 10px; }
