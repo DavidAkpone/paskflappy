@@ -52,9 +52,11 @@ playerButtons.forEach(btn => {
 
 restartBtn.addEventListener("click", () => startNewRun());
 changePlayerBtn.addEventListener("click", () => {
+  setGameMode(false);
   endSection.classList.add("hidden");
   selectSection.classList.remove("hidden");
   statusEl.classList.add("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 resetCluesBtn.addEventListener("click", () => {
@@ -76,13 +78,19 @@ let pipeSpeed = 2.5;
 let pipeWidth = 46;
 let safeZoneRemaining = safeZoneFrames;
 
+function setGameMode(active) {
+  document.body.classList.toggle("game-active", active);
+}
+
 function startGameScreen() {
+  setGameMode(true);
   selectSection.classList.add("hidden");
   endSection.classList.add("hidden");
   clueOverlay.classList.add("hidden");
   statusEl.classList.remove("hidden");
   gameArea.classList.remove("hidden");
   statusEl.innerHTML = `Aktiv spelare: <strong>${chosenPlayer}</strong> - nästa ledtråd: ${playerClueIndex + 1} av 3`;
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   // Ladda bilden för fågeln
   birdImage.src = `images/${chosenPlayer.toLowerCase()}.png`;
